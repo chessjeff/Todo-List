@@ -1,3 +1,6 @@
-import print from '/src/task.js';
+import task from '/src/task.js';
 
-console.log(print());
+let title = 'Code'
+
+let hehe = task(title);
+console.log(hehe.title);

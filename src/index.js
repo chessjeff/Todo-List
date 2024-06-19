@@ -1,6 +1,6 @@
-import task from '/src/task.js';
+import newTask from '/src/task.js';
+import displayTask from '/src/display.js'
 
-let title = 'Code'
-
-let hehe = task(title);
-console.log(hehe.title);
+displayTask(newTask());
+displayTask(newTask());
+displayTask(newTask());

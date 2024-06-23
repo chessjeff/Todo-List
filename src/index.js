@@ -1,24 +1,44 @@
 import { newTask } from './task.js';
-import { displayTask } from './display.js'
+import { createParentDiv, newTaskButton } from './display.js'
 import { toggleBool, togglePriority } from './toggle.js';
 import { newProject, addTaskToProject } from './project.js';
-import { openForm } from './form.js';
+import { openForm, closeForm, getFormData } from './form.js';
 
 const newProjectButton = document.getElementById('test');
 let createdProjects = [];
 
-newProjectButton.addEventListener('click', () => {
+newProjectButton.addEventListener('click', function initiateNewProject() {
+    //project div will have class [project.id]
     let project = newProject();
     if (project) {
-        let task = newTask();
-        addTaskToProject(project, task);
+        console.log(project);
+        const projectDiv = createParentDiv(project);
+        const taskButton = newTaskButton(projectDiv);
+        
         createdProjects.push(project);
-        console.log(createdProjects);
+        
+        initiateNewTask(taskButton);
+        return project;
     }
 });
 
-const formButton = document.getElementById('test2');
-formButton.addEventListener('click', openForm);
+const initiateNewTask = function(taskButton) {
+    taskButton.addEventListener('click', () => {
+        openForm();
+    
+        let submitButton = document.getElementById('form-submit');
+        submitButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            let data = getFormData()
+            console.log(data);
+            closeForm();
+        });
+    });
+}
+
+
+
+
 
 /**
  * +Task button pulls up a form

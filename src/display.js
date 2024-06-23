@@ -2,7 +2,7 @@
 //add text obtained from task.js
 //append all children to container dom element
 
-export default function displayTask(task) {
+function displayTask(task) {
     let parent = createParentDiv();
     let children = createChildren();
     addTextToChildren(children, task); 
@@ -50,9 +50,19 @@ const addChildrenToParent = function(children, parent) {
     };
 };
 
-const createParentDiv = function() {
+const createParentDiv = function(project) {
     let parent = document.createElement('div');
-    parent.id = 'task-container';
+    parent.id = project.id;
+    parent.textContent = project.title;
     container.appendChild(parent);
     return parent;
 };
+
+const newTaskButton = function(projectDiv) {
+    const button = document.createElement('button');
+    button.textContent = '+ Task';
+    projectDiv.appendChild(button);
+    return button;
+}
+
+export { createParentDiv, newTaskButton }

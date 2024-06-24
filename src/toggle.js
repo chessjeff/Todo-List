@@ -3,8 +3,7 @@ const toggleBool = function(bool) {
 }
 
 const togglePriority = function(data) {
-    let newData = data === 2 ? data = 0 : data + 1;
-    return newData;
+    return data = data === 2 ? data = 0 : ++data;
 }
 
 const editText = function(text) {

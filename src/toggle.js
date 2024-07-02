@@ -2,8 +2,20 @@ const toggleBool = function(bool) {
     return bool ? false : true;
 }
 
-const togglePriority = function(data) {
-    return data = data === 2 ? data = 0 : ++data;
+const togglePriority = function(oldPriority) {
+    const priorities = ['priority-0', 'priority-1', 'priority-2'];
+    let i = priorities.indexOf(oldPriority);
+    let newPriority;
+    if (i === 2) {
+        i = 0;
+        return newPriority = priorities[0];
+    } else {
+        return newPriority = priorities[i + 1];
+    }
+}
+
+const deleteTask = function(taskDiv, projectDiv) {
+    projectDiv.removeChild(taskDiv);
 }
 
 const editText = function(text) {
@@ -16,4 +28,4 @@ const removeProject = function(index, arr) {
     //remove project at index
 }
 
-export {toggleBool, togglePriority}
+export { toggleBool, togglePriority, deleteTask };

@@ -14,6 +14,7 @@ function Project(data) {
     this.id = data[2];
 };
 
+let i = 0;
 const getProjectProperties = function() {
     let title = prompt('Project Title')
     let content = [];
@@ -28,6 +29,5 @@ const addTaskToProject = function(project, task) {
     project.content.push(task);
 };
 
-let i = 0;
 
 export { newProject, addTaskToProject };

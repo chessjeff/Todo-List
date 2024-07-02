@@ -66,10 +66,10 @@ const openForm = function() {
 }
 
 const getFormData = function() {
-    let title = document.getElementById('form-title').value;
-    let description = document.getElementById('form-description').value;
-    let date = document.getElementById('form-date').value;
-    let priority = document.getElementById('form-priority').selectedIndex;
+    let title = document.getElementById('form-title').value,
+        description = document.getElementById('form-description').value,
+        date = document.getElementById('form-date').value,
+        priority = document.getElementById('form-priority').selectedIndex;
 
     let data = [title, description, date, priority];
     return data;

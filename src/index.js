@@ -3,6 +3,7 @@ import { createParentDiv, newTaskButton, displayTask } from './display.js'
 import { toggleBool, togglePriority } from './toggle.js';
 import { newProject, addTaskToProject } from './project.js';
 import { openForm, closeForm, getFormData } from './form.js';
+import './styles.css'
 
 const newProjectButton = document.getElementById('test');
 let createdProjects = [];

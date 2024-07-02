@@ -1,4 +1,4 @@
-import { togglePriority } from "./toggle";
+import { togglePriority, deleteTask } from "./toggle";
 
 //Variables
 let container = document.getElementById('main'),
@@ -6,26 +6,38 @@ let container = document.getElementById('main'),
     description,
     dueDate,
     priority,
-    id;
+    time;
 
 function displayTask(task, projectDiv) {
     let taskDiv = createTaskDiv(task.id); //div
     let children = createChildrenDivs(); //array
 
-    addTextToChildren(children, task); 
-    addChildrenToParent(children, taskDiv);
+    // All content from task constructor
+    addContentToChildren(children, task);
 
-    //Special functions
-    enableTaskFunctions(children, task);
+    // Include extra buttons for special functions
+    includeComplete(children)
+    includeDelete(children, task.id);
     
+    //Special functions
+    enableTaskFunctions(children, task, taskDiv, projectDiv);
+    
+    // Put everything on the page at once
+    addChildrenToParent(children, taskDiv);
     projectDiv.appendChild(taskDiv);
 }
 
-const enableTaskFunctions = function(children, task) {
-    let button = children[3]
-    button.addEventListener('click', () => {
+const enableTaskFunctions = function(children, task, taskDiv, projectDiv) {
+    let toggleButton = children[3];
+    toggleButton.addEventListener('click', () => {
+        toggleButton.classList.remove(task.priority);
         task.priority = togglePriority(task.priority);
-        button.id = task.priority;
+        toggleButton.classList.add(task.priority);
+    });
+
+    let deleteButton = children[6];
+    deleteButton.addEventListener('click', () => {
+        deleteTask(taskDiv, projectDiv);
     });
 }
 
@@ -36,15 +48,18 @@ const createChildrenDivs = function() {
         description = document.createElement('div'),
         dueDate = document.createElement('div'),
         priority = document.createElement('button'),
-        id = document.createElement('div'),
+        time = document.createElement('div'),
     ]
 
     title.className = 'task-title';
     description.className = 'task-description';
     dueDate.className = 'due-date';
     priority.className = 'task-priority';
-    id.className = 'task-id';
-
+    time.className = 'task-time';
+    
+    dueDate.textContent = 'Due on: ';
+    time.textContent = 'Created on: '
+    
     return children;
 }
 
@@ -64,16 +79,20 @@ const createTaskDiv = function(id) {
 }
 
 //Build Elements
-const addTextToChildren = function(children, task) {
+const addContentToChildren = function(children, task) {
     let i = 0;
     for (const property in task) {
-        if (children[i].tagName == "H2" || children[i].tagName == "DIV") {
-            children[i].textContent = task[property];
-        } else {
-            //priority button
-            children[i].id = task[property];
+        let taskProp = task[property]
+        if (property !== 'id') {
+            if (children[i].tagName == "BUTTON") {
+                const priorities = ['priority-0', 'priority-1', 'priority-2'];
+                taskProp = priorities[taskProp]
+                children[i].classList.add(taskProp);
+            } else {
+                children[i].textContent += taskProp;
+           }
+            i++;
         }
-        i++;
     }
     return children;
 };
@@ -92,6 +111,23 @@ const newTaskButton = function(projectDiv, id) {
 
     projectDiv.appendChild(button);
     return button;
+}
+
+const includeDelete = function(children, id) {
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete' //prob an svg someday
+    deleteButton.id = id;
+    deleteButton.classList.add(`delete-${id}`);
+
+    children.push(deleteButton)
+}
+
+const includeComplete = function(children) {
+    const completeButton = document.createElement('input');
+    completeButton.setAttribute('type', 'checkbox');
+    completeButton.classList.add('complete-button');
+
+    children.push(completeButton);
 }
 
 export { createParentDiv, newTaskButton, displayTask };

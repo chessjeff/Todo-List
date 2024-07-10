@@ -5,7 +5,7 @@ import { newProject, addTaskToProject } from './project.js';
 import { openForm, closeForm, getFormData } from './form.js';
 import './styles.css'
 
-const newProjectButton = document.getElementById('test');
+const newProjectButton = document.getElementById('new-project');
 let createdProjects = [];
 
 newProjectButton.addEventListener('click', function initiateNewProject() {
@@ -16,7 +16,8 @@ newProjectButton.addEventListener('click', function initiateNewProject() {
         const taskButton = newTaskButton(projectDiv, project.id);
         
         createdProjects.push(project);
-        
+        storeProject(createdProjects);
+
         initiateNewTask(taskButton, project, projectDiv);
     }
 });
@@ -29,7 +30,8 @@ const initiateNewTask = function(taskButton, project, projectDiv) {
         submitButton.addEventListener('click', (e) => {
             e.preventDefault();
             let data = newTask(getFormData());
-            addTaskToProject(project, data);
+            addTaskToProject(project, data)
+            storeProject(createdProjects);
 
             closeForm();
 
@@ -37,3 +39,21 @@ const initiateNewTask = function(taskButton, project, projectDiv) {
         });
     });
 }
+
+const storeProject = function(projects) {
+    let projectsJSON = JSON.stringify(projects)
+    localStorage.setItem('projects', projectsJSON);
+}
+
+const getProjectsFromStorage = function() {
+    const projects = JSON.parse(localStorage.getItem('projects'));
+    console.log(projects.length);
+    if (projects) {
+        for (let i = 0; i < projects.length; i++) {
+            createdProjects.push(projects[i]);
+            return createdProjects;
+        }
+    }
+}
+
+getProjectsFromStorage();

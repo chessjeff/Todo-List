@@ -26,7 +26,7 @@ const getProjectProperties = function() {
 };
 
 const addTaskToProject = function(project, task) {
-    project.content.push(task);
+    return project.content.push(task);
 };
 
 

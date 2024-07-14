@@ -4,9 +4,9 @@ const newProject = function() {
         let newProject = new Project(data);
         return newProject;
     } else {
-        console.error('Projects must have a title.')
+        console.error('Projects must have a title.');
     }
-}
+};
 
 function Project(data) {
     this.title = data[0];
@@ -14,15 +14,24 @@ function Project(data) {
     this.id = data[2];
 };
 
-let i = 0;
+
 const getProjectProperties = function() {
     let title = prompt('Project Title')
     let content = [];
-    let id = i;
+    let id = getProjectId();
     if (title) {
-        i++;
         return [title, content, id];
     };
+};
+
+const getProjectId = function() {
+    return projectCount++;
+};
+
+let projectCount = 0;
+const setProjectCount = function(projects) {
+    projectCount = projects.length;
+    return projectCount;
 };
 
 const addTaskToProject = function(project, task) {
@@ -30,4 +39,5 @@ const addTaskToProject = function(project, task) {
 };
 
 
-export { newProject, addTaskToProject };
+
+export { newProject, addTaskToProject, setProjectCount };

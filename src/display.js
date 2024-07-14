@@ -85,8 +85,6 @@ const addContentToChildren = function(children, task) {
         let taskProp = task[property]
         if (property !== 'id') {
             if (children[i].tagName == "BUTTON") {
-                const priorities = ['priority-0', 'priority-1', 'priority-2'];
-                taskProp = priorities[taskProp]
                 children[i].classList.add(taskProp);
             } else {
                 children[i].textContent += taskProp;
@@ -104,19 +102,19 @@ const addChildrenToParent = function(children, taskDiv) {
 };
 
 //Buttons
-const newTaskButton = function(projectDiv, id) {
+const newTaskButton = function(id) {
     const button = document.createElement('button');
     button.textContent = '+ Task';
     button.id = id;
 
-    projectDiv.appendChild(button);
+
     return button;
 }
 
 const includeDelete = function(children, id) {
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete' //prob an svg someday
-    deleteButton.id = id;
+    deleteButton.id = `delete-${id}`;
     deleteButton.classList.add(`delete-${id}`);
 
     children.push(deleteButton)

@@ -26,10 +26,6 @@ const openForm = function() {
         date.setAttribute('type', 'date');
         date.id = 'form-date'
     
-        //create checkbox for complete
-        const complete = document.createElement('checkBox');
-        complete.id = 'form-complete'
-    
         //create priority selection
         const priority = document.createElement('select');
         priority.setAttribute('form', 'task-form');
@@ -56,7 +52,6 @@ const openForm = function() {
         form.append(title);
         form.append(description);
         form.append(date);
-        form.append(complete);
         form.append(priority);
         form.append(submit);
 
@@ -69,7 +64,7 @@ const getFormData = function() {
     let title = document.getElementById('form-title').value,
         description = document.getElementById('form-description').value,
         date = document.getElementById('form-date').value,
-        priority = document.getElementById('form-priority').selectedIndex;
+        priority = setPriority(document.getElementById('form-priority').selectedIndex);
 
     let data = [title, description, date, priority];
     return data;
@@ -79,6 +74,11 @@ const closeForm = function() {
     let form = document.getElementById('task-form')
     main.removeChild(form);
     formActive = false;
+}
+
+const setPriority = function(selectedIndex) {
+    const priorities = ['priority-0', 'priority-1', 'priority-2'];
+    return priorities[selectedIndex];
 }
 
 export { openForm, closeForm, getFormData };

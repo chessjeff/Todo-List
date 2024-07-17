@@ -64,16 +64,24 @@ const createChildrenDivs = function() {
 }
 
 const createParentDiv = function(project) {
-    let parent = document.createElement('h1');
+    const projectDiv = document.createElement('div')
+    projectDiv.classList.add('project');
+
+
+    const parent = document.createElement('h1');
     parent.id = project.id;
     parent.textContent = project.title;
-    container.appendChild(parent);
-    return parent;
+    parent.classList.add('project-title')
+
+    projectDiv.appendChild(parent);
+    container.appendChild(projectDiv);
+    return projectDiv;
 };
 
 const createTaskDiv = function(id) {
     const taskDiv = document.createElement('div');
     taskDiv.id = id;
+    taskDiv.classList.add('task');
 
     return taskDiv;
 }
@@ -106,7 +114,7 @@ const newTaskButton = function(id) {
     const button = document.createElement('button');
     button.textContent = '+ Task';
     button.id = id;
-
+    button.classList.add('task-button');
 
     return button;
 }
@@ -115,7 +123,7 @@ const includeDelete = function(children, id) {
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete' //prob an svg someday
     deleteButton.id = `delete-${id}`;
-    deleteButton.classList.add(`delete-${id}`);
+    deleteButton.classList.add(`delete`);
 
     children.push(deleteButton)
 }

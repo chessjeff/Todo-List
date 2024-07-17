@@ -1,9 +1,13 @@
 let formActive = false;
-const main = document.getElementById('main');
+const sideBar = document.getElementById('side-bar');
 
 const openForm = function() {
     if (!formActive) {
         formActive = true;
+
+        const formContainer = document.createElement('div');
+        formContainer.id = 'form-container'
+        formContainer.classList.add('form-container');
 
         // create a form
         const form = document.createElement('form');
@@ -13,23 +17,38 @@ const openForm = function() {
         //create input for Title
         const title = document.createElement('input');
         title.setAttribute('type', 'text');
-        title.setAttribute('placeholder', 'Do Laundry');
         title.id = 'form-title';
+
+        const titleLabel = document.createElement("label");
+        titleLabel.setAttribute('for', 'form-title');
+        titleLabel.textContent = 'Task Title:';
         
         //create input for description
         const description = document.createElement('input');
         description.setAttribute('type', 'text');
         description.id = 'form-description'
+
+        const descriptionLabel = document.createElement('label');
+        descriptionLabel.setAttribute('for', 'form-description');
+        descriptionLabel.textContent = 'Description:';
     
         //create input for date
         const date = document.createElement('input');
         date.setAttribute('type', 'date');
         date.id = 'form-date'
+
+        const dateLabel = document.createElement('label');
+        dateLabel.setAttribute('for', 'form-date');
+        dateLabel.textContent = 'Due Date:';
     
         //create priority selection
         const priority = document.createElement('select');
         priority.setAttribute('form', 'task-form');
         priority.id = 'form-priority'
+
+        const priorityLabel = document.createElement('label');
+        priorityLabel.setAttribute('for', 'form-priority');
+        priorityLabel.textContent = 'Priority:'
     
         //create selection options
         const lowPriority = document.createElement('option');
@@ -49,14 +68,19 @@ const openForm = function() {
         submit.id = 'form-submit';
         
         //append inputs to form
+        form.append(titleLabel);
         form.append(title);
+        form.append(descriptionLabel);
         form.append(description);
+        form.append(dateLabel);
         form.append(date);
+        form.append(priorityLabel);
         form.append(priority);
         form.append(submit);
 
         //Add all to parent div
-        main.appendChild(form);
+        formContainer.appendChild(form);
+        sideBar.appendChild(formContainer);
     }
 }
 
@@ -71,8 +95,8 @@ const getFormData = function() {
 }
 
 const closeForm = function() {
-    let form = document.getElementById('task-form')
-    main.removeChild(form);
+    const form = document.getElementById('form-container')
+    sideBar.removeChild(form);
     formActive = false;
 }
 

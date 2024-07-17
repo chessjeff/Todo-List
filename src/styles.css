@@ -1,3 +1,102 @@
+:root {
+    background-color: rgb(.5, .5, .5);
+    color: white;
+}
+
+.body {
+    display: flex;
+}
+.side-bar {
+    padding-right: 4vw;
+}
+.side-bar-title {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.side-bar > button {
+    background-color: rgb(110, 110, 110);
+    border: none;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 16px;
+}
+
+.project {
+    background-color: rgb(33, 33, 33);
+    width: max(50vw, 66vw);
+    margin: 2vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-title {
+    padding: 1%;
+    margin: 0;
+    background-color: rgb(110, 110, 110);
+}
+
+.task-button {
+    justify-self: start;
+    align-self: start;
+    margin: 1%;
+    background-color: rgb(58, 55, 255);
+    border: none;
+    border-radius: 6px;
+}
+
+.task {
+    padding: 0 4%;
+    display: flex;
+    align-items: start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    height: min(20%);
+}
+
+.complete-button {
+    order: -1;
+    flex-basis: 3%;
+}
+
+.task-title {
+    margin: 0;
+    flex-basis: 96%;
+    order: 0;
+}
+
+.task-description {
+    flex-basis: 100%;
+    padding-left: 2.5vw;
+    font-style: italic;
+}
+
+.task-time {
+    flex: 1 1 50%;
+    order: 2;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.702);
+}
+
+.due-date {
+    order: 1;
+    flex: 1 1 10%;
+    padding-left: 2.5vw;
+}
+
+.task-priority {
+    flex: 1 1 37%;
+    order: 3;
+    border: none;
+    margin-left: 2.5vw;
+
+}
+
+.delete {
+    flex: 2 1 100;
+    order: 4;
+}
+
 .priority-0 {
     background-color: green;
 }
@@ -9,3 +108,4 @@
 .priority-2 {
     background-color: red;
 }
+

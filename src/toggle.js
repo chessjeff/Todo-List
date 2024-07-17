@@ -3,9 +3,9 @@ const toggleBool = function(bool) {
 }
 
 const togglePriority = function(oldPriority) {
-    const priorities = ['priority-0', 'priority-1', 'priority-2'];
+    let priorities = ['priority-0', 'priority-1', 'priority-2'];
     let i = priorities.indexOf(oldPriority);
-    const newPriority = '';
+    let newPriority = '';
     if (i === 2) {
         i = 0;
         newPriority = priorities[0];
